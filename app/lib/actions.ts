@@ -73,7 +73,6 @@ export async function updateInvoice(id: string, formData: FormData) {
   `;
   }catch(error){
     console.error(error)
-    return{message: 'error updating the data'};
   }
  
   revalidatePath('/dashboard/invoices');
@@ -81,7 +80,6 @@ export async function updateInvoice(id: string, formData: FormData) {
 }
 export async function deleteInvoice(id: string) {
 
-    throw new Error('failed to delete');
 
   await sql`DELETE FROM invoices WHERE id = ${id}`;
   revalidatePath('/dashboard/invoices');
