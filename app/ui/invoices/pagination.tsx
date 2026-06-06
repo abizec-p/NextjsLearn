@@ -5,10 +5,24 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { generatePagination } from '@/app/lib/utils';
 
+import { usePathname, useSearchParams } from 'next/navigation';
+
 export default function Pagination({ totalPages }: { totalPages: number }) {
+  const pathname = usePathname();
+  const searchparams = useSearchParams();
+  const currentPage = Number(searchparams.get('page')) | 1;
+
+
+
+  const createPageURL = (pageNumber: Number | string) =>{
+    const params = new URLSearchParams(searchparams);
+    params.set('page', pageNumber.toString());
+    return `$(pathname)?${params.toString()}`;
+
+  }
   // NOTE: Uncomment this code in Chapter 10
 
-  // const allPages = generatePagination(currentPage, totalPages);
+  const allPages = generatePagination(currentPage, totalPages);
 
   return (
     <>
